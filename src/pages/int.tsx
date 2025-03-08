@@ -49,6 +49,7 @@ const Int = () => {
           <img src="/back_icon.png" alt="" />
         </button>
         {/* <img src="/YemekCi.png" alt="yemekci" className={styles.logo} /> */}
+        <h2>Gastro Keşif</h2>
         <button className={styles.header_button} onClick={profileButton}>
           <img src="/person_icon.png" alt="" />
         </button>

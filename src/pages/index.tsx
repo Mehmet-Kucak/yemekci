@@ -196,6 +196,7 @@ const Home = () => {
           <img src="/back_icon.png" alt="" />
         </button>
         {/**<img src="/YemekCi.png" alt="yemekci" className={styles.logo} />**/}
+        <h2>Gastro Keşif</h2>
         <button className={styles.header_button} onClick={profileButton}>
           <img src="/person_icon.png" alt="" />
         </button>
@@ -203,7 +204,7 @@ const Home = () => {
       <main className={styles.main}>
         {selectedProduct === -1 && selectedPlace === -1 && (
           <>
-            <img src="/ci_logo.png" className={styles.ci_logo} />
+            {/**<img src="/ci_logo.png" className={styles.ci_logo} />**/}
             {data.length === 0 ? (
               <h2 className={styles.title}>
                 <span>{t("title")}</span>
@@ -306,16 +307,6 @@ const Home = () => {
                 }}
               />
               <PlaceCard
-                name="Meşhur ortaklar çöp şiş servet usta"
-                img="/restaurant_placeholder.jpg"
-                stars={4.3}
-                reviews={467}
-                distance={2.6}
-                on_click={() => {
-                  placeButton(1);
-                }}
-              />
-              <PlaceCard
                 name="Efe Çöp Şiş"
                 img="/restaurant_placeholder.jpg"
                 stars={4.3}
@@ -323,6 +314,16 @@ const Home = () => {
                 distance={2.6}
                 on_click={() => {
                   placeButton(2);
+                }}
+              />
+              <PlaceCard
+                name="Meşhur ortaklar çöp şiş servet usta"
+                img="/restaurant_placeholder.jpg"
+                stars={4.3}
+                reviews={467}
+                distance={2.6}
+                on_click={() => {
+                  placeButton(1);
                 }}
               />
               <PlaceCard
