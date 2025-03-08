@@ -204,7 +204,6 @@ const Home = () => {
       <main className={styles.main}>
         {selectedProduct === -1 && selectedPlace === -1 && (
           <>
-            {/**<img src="/ci_logo.png" className={styles.ci_logo} />**/}
             {data.length === 0 ? (
               <h2 className={styles.title}>
                 <span>{t("title")}</span>
