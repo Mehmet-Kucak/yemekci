@@ -232,16 +232,6 @@ const Favourites = () => {
                     }}
                   />
                   <PlaceCard
-                    name="Meşhur ortaklar çöp şiş servet usta"
-                    img="/restaurant_placeholder.jpg"
-                    stars={4.3}
-                    reviews={467}
-                    distance={2.6}
-                    on_click={() => {
-                      placeButton(1);
-                    }}
-                  />
-                  <PlaceCard
                     name="Efe Çöp Şiş"
                     img="/restaurant_placeholder.jpg"
                     stars={4.3}
@@ -249,6 +239,16 @@ const Favourites = () => {
                     distance={2.6}
                     on_click={() => {
                       placeButton(2);
+                    }}
+                  />
+                  <PlaceCard
+                    name="Meşhur ortaklar çöp şiş servet usta"
+                    img="/restaurant_placeholder.jpg"
+                    stars={4.3}
+                    reviews={467}
+                    distance={2.6}
+                    on_click={() => {
+                      placeButton(1);
                     }}
                   />
                   <PlaceCard
