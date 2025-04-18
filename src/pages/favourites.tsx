@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import BottomNavbar from "@components/BottomNavbar";
 import ProductCard from "@/components/ProductCard";
@@ -36,6 +36,7 @@ const Favourites = () => {
   const [currUser, setCurrUser] = useState<User | null>(null);
   const [userData, setUserData] = useState<any>(null);
   const t = useTranslations("Favourites");
+  const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -164,7 +165,7 @@ const Favourites = () => {
           <img src="/person_icon.png" alt="" />
         </button>
       </header>
-      <main className={styles.main}>
+      <main className={styles.main} ref={mainRef}>
         {selectedProduct === -1 && selectedPlace === -1 && (
           <h1>{t("title")}</h1>
         )}

@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import styles from "@styles/home.module.css";
 import BottomNavbar from "@components/BottomNavbar";
@@ -39,6 +41,7 @@ const Home = () => {
   const [userData, setUserData] = useState<any>(null);
   const router = useRouter();
   const t = useTranslations("Index");
+  const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -61,6 +64,12 @@ const Home = () => {
       router.replace(router.pathname, undefined, { locale: storedLocale });
     }
   }, [router]);
+
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [selectedProduct, selectedPlace]);
 
   const getProducts = async () => {
     if (navigator.geolocation) {
@@ -218,7 +227,7 @@ const Home = () => {
           <img src="/person_icon.png" alt="" />
         </button>
       </header>
-      <main className={styles.main}>
+      <main className={styles.main} ref={mainRef}>
         {selectedProduct === -1 && selectedPlace === -1 && (
           <>
             {data.length === 0 ? (
