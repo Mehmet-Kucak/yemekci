@@ -26,6 +26,8 @@ type DocumentData = {
 };
 const Favourites = () => {
   const [data, setData] = useState<DocumentData[]>([]);
+  const [desc, setDesc] = useState("");
+
   const [loading, setLoading] = useState<boolean>(true);
   const [position, setPosition] = useState<[number, number]>([0, 0]); // [lat, lng
   const [selectedProduct, setSelectedProduct] = useState<number>(-1);
@@ -104,6 +106,8 @@ const Favourites = () => {
   const productButton = (product: number) => {
     console.log(product);
     setSelectedProduct(product);
+    setDesc("");
+    fetchDescription(product);
   };
 
   const placeButton = (index: number) => {
@@ -118,11 +122,25 @@ const Favourites = () => {
       setSelectedPlace(-1);
     } else {
       setSelectedProduct(-1);
+      setDesc("");
     }
   };
 
   const profileButton = () => {
     router.push("/profile");
+  };
+
+  const fetchDescription = async (product: number) => {
+    const res = await fetch("/api/getOpenai", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: data[product].name,
+        lang: router.locale,
+      }),
+    });
+    const desc = await res.json();
+    setDesc(desc.description);
   };
 
   return (
@@ -203,21 +221,11 @@ const Favourites = () => {
                     {t("aboutProduct", { product: data[selectedProduct].name })}
                   </h3>
                   <br />
-                  <p>
-                    Ortaklar Çöpşiş, Türk mutfağının sevilen lezzetlerinden
-                    biridir. Kökeni Anadolu&apos;ya dayanan bu yemek, genellikle
-                    dana eti veya tavuk eti kullanılarak hazırlanır. Et
-                    parçaları, önceden hazırlanan bir marinasyon karışımına
-                    batırılarak şişlere dizilir ve ardından mangalda pişirilir.
-                    Marinasyon karışımı genellikle yoğurt, zeytinyağı, sarımsak
-                    ve çeşitli baharatlardan oluşur. Pişirme sırasında etlerin
-                    arası zaman zaman tereyağı ile yağlanır, bu da lezzetini ve
-                    suluğunu artırır. Çöpşiş, genellikle közlenmiş domates,
-                    biber ve soğanla servis edilirken, yanında pilav, lavaş veya
-                    ekmek gibi ek lezzetler de sunulabilir. Bu nefis yemek, Türk
-                    mutfağının zengin lezzetlerinden biri olarak mangal
-                    partilerinde ve özel günlerde sıkça tercih edilir.
-                  </p>
+                  {desc === "" ? (
+                    <div className={styles.loaderWhite}>&nbsp;</div>
+                  ) : (
+                    <p>{desc}</p>
+                  )}
                 </div>
                 <hr />
                 <div className={styles.places_container}>
