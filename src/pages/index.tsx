@@ -200,6 +200,7 @@ const Home = () => {
       body: JSON.stringify({
         name: data[product].name,
         lang: router.locale,
+        city: data[product].province,
       }),
     });
     const desc = await res.json();
