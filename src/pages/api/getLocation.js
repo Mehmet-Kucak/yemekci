@@ -20,7 +20,7 @@ export default function handler(req, res) {
     }
 
     // Load the GeoJSON file
-    const geoJsonPath = path.join(process.cwd(), 'public', 'TurkeyAdm4.geojson');
+    const geoJsonPath = path.join(process.cwd(), 'public', 'YemekciGeoJSON.geojson');
     if (!fs.existsSync(geoJsonPath)) {
       console.error('GeoJSON file not found at:', geoJsonPath);
       return res.status(500).json({ error: 'GeoJSON file not found' });

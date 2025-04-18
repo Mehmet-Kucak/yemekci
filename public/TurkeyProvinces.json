@@ -646,5 +646,13 @@
     "longitude": "31.1565",
     "population": 360388,
     "region": "Karadeniz"
+  },
+  {
+    "id": 82,
+    "name": "Kuzey Kıbrıs",
+    "latitude": "35.1856",
+    "longitude": "33.3823",
+    "population": 360388,
+    "region": "Akdeniz"
   }
 ]
