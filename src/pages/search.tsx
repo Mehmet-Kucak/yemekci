@@ -31,6 +31,7 @@ type DocumentData = {
   name: string;
   province: string;
   img: string;
+  productGroup: string;
 };
 
 const Search = () => {
@@ -119,11 +120,10 @@ const Search = () => {
             navigator.geolocation.getCurrentPosition(resolve, reject);
           }
         );
-        const lat = await position.coords.latitude;
-        const lng = await position.coords.longitude;
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
 
         await setPosition([lat, lng]);
-
         await setSearchState(2);
         await setData([]);
         await setSelectedProduct(-1);
@@ -143,24 +143,58 @@ const Search = () => {
           );
 
           const querySnapshot = await getDocs(q);
-          const docs = querySnapshot.docs.map((doc) => {
-            const data = doc.data();
+          // include productGroup for sorting
+          const docsWithGroup = querySnapshot.docs.map((doc) => {
+            const data = doc.data() as any;
             return {
               id: data.registrationNumber,
               name: data.name,
               province: data.province,
               img: data.img,
+              productGroup: data.productGroup,
             };
           });
 
-          setData(docs);
+          // custom group priority list
+          const priorityList = [
+            "Yemekler ve çorbalar",
+            "İşlenmiş İşlenmemiş Et Ürünleri",
+            "Fırıncılık ve pastacılık mamulleri, hamur işleri, tatlılar",
+            "Çikolata, şekerleme ve türevi ürünler",
+            "Dondurmalar ve yenilebilir buzlar",
+            "Yiyecekler için çeşni / lezzet vericiler, soslar ve tuz",
+            "Alkolsüz içecekler",
+            "Biralar ve diğer alkollü içkiler",
+            "Tütün",
+            "Peynirler",
+            "Tereyağı dâhil katı ve sıvı yağlar",
+            "Peynirler ve tereyağı dışında kalan süt ürünleri",
+            "Bal",
+            "İşlenmiş ve işlenmemiş meyve ve sebzeler ile mantarlar",
+          ];
+          const getPriority = (group: string) => {
+            const idx = priorityList.indexOf(group);
+            return idx === -1 ? Number.MAX_SAFE_INTEGER : idx;
+          };
+
+          // sort by priority, then by name
+          docsWithGroup.sort((a, b) => {
+            const pa = getPriority(a.productGroup);
+            const pb = getPriority(b.productGroup);
+            if (pa !== pb) return pa - pb;
+            return a.name.localeCompare(b.name);
+          });
+
+          // keep productGroup property for DocumentData compliance
+          const sortedDocs = docsWithGroup;
+          setData(sortedDocs);
         } catch (error) {
           console.error("Error fetching documents: ", error);
         }
       } catch (err: any) {
         await setCity(["01", "", err.message]);
-        await console.error(err.message);
-        await toast.error(err.message);
+        console.error(err.message);
+        toast.error(err.message);
       }
     } else {
       setCity(["01", "", "Geolocation is not supported"]);

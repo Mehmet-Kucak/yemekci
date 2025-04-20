@@ -32,6 +32,7 @@ type DocumentData = {
   name: string;
   province: string;
   img: string;
+  productGroup: string;
 };
 
 const Home = () => {
@@ -125,8 +126,8 @@ const Home = () => {
 
   const getProducts = async () => {
     function getAccuratePosition(
-      threshold = 30, // target accuracy in meters
-      maxWait = 20000 // maximum wait time in ms
+      threshold = 30,
+      maxWait = 20000
     ): Promise<GeolocationPosition> {
       return new Promise((resolve, reject) => {
         if (!navigator.geolocation) {
@@ -148,7 +149,7 @@ const Home = () => {
 
         watchId = navigator.geolocation.watchPosition(
           (pos) => {
-            console.log(`Accuracy: ${pos.coords.accuracy} m`);
+            console.log(`Accuracy: ${pos.coords.accuracy} m`);
             if (
               !bestPosition ||
               pos.coords.accuracy < bestPosition.coords.accuracy
@@ -215,7 +216,40 @@ const Home = () => {
                 name: data.name,
                 province: data.province,
                 img: data.img,
+                productGroup: data.productGroup,
               };
+            });
+
+            // YOUR custom priority order:
+            const priorityList = [
+              "Yemekler ve çorbalar",
+              "Fırıncılık ve pastacılık mamulleri, hamur işleri, tatlılar",
+              "İşlenmiş İşlenmemiş Et Ürünleri",
+              "Çikolata, şekerleme ve türevi ürünler",
+              "Dondurmalar ve yenilebilir buzlar",
+              "Yiyecekler için çeşni / lezzet vericiler, soslar ve tuz",
+              "Alkolsüz içecekler",
+              "Biralar ve diğer alkollü içkiler",
+              "Tütün",
+              "Peynirler",
+              "Tereyağı dâhil katı ve sıvı yağlar",
+              "Peynirler ve tereyağı dışında kalan süt ürünleri",
+              "Bal",
+              "İşlenmiş ve işlenmemiş meyve ve sebzeler ile mantarlar",
+            ];
+
+            const getPriority = (group: string) => {
+              const idx = priorityList.indexOf(group);
+              return idx === -1 ? Number.MAX_SAFE_INTEGER : idx;
+            };
+
+            docs.sort((a, b) => {
+              const pa = getPriority(a.productGroup);
+              const pb = getPriority(b.productGroup);
+              if (pa !== pb) {
+                return pa - pb; // group priority
+              }
+              return a.name.localeCompare(b.name); // alphabetical within group
             });
 
             setData(docs);
@@ -224,13 +258,13 @@ const Home = () => {
           }
         } else {
           await setCity(["", "", responseData.error]);
-          await console.error(responseData.error);
-          await toast.error(responseData.error);
+          console.error(responseData.error);
+          toast.error(responseData.error);
         }
       } catch (err: any) {
         await setCity(["", "", err.message]);
-        await console.error(err.message);
-        await toast.error(err.message);
+        console.error(err.message);
+        toast.error(err.message);
       }
     } else {
       setCity(["", "", "Geolocation is not supported"]);
@@ -253,6 +287,7 @@ const Home = () => {
   };
 
   const productButton = async (product: number) => {
+    console.log(data[product].productGroup);
     await setSelectedProduct(product);
     setDesc("");
     setSelectedPlace(-1);
