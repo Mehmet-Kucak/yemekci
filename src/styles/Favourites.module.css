@@ -106,7 +106,7 @@
 }
 
 .product_container {
-  padding: 20px 0;
+  padding: 20px 0 60px;
   width: 100%;
   height: auto;
   display: flex;
@@ -162,7 +162,7 @@
 }
 
 .places_container {
-  padding: 20px 0;
+  padding: 20px 0 60px 0;
   width: 100%;
   height: auto;
   display: flex;
@@ -442,13 +442,17 @@
   border-radius: 40px;
   font-size: 18px;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
+  text-align: center;
+  justify-content: center;
+  font-size: large;
 }
 .place_nav_button:hover {
   background-color: #d00;
 }
-.place_nav_button img {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
+.place_nav_button > img {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  transform: translateY(3px);
 }
