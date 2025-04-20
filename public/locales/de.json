@@ -8,7 +8,10 @@
     "searchingProducts": "Produkte in Ihrer Umgebung Werden Abgerufen",
     "addFav": "Zu Favoriten Hinzufügen",
     "removeFav": "Aus Favoriten Entfernen",
-    "aboutProduct": "Informationen Über {product}"
+    "aboutProduct": "Informationen Über {product}",
+    "reviews": "Bewertungen",
+    "startNav": "Navigation Starten"
+
   },
 
   "Search": {
@@ -20,7 +23,9 @@
     "searchingProducts": "Produkte in Ihrer Umgebung Werden Abgerufen",
     "addFav": "Zu Favoriten Hinzufügen",
     "removeFav": "Aus Favoriten Entfernen",
-    "aboutProduct": "Informationen Über {product}"
+    "aboutProduct": "Informationen Über {product}",
+    "reviews": "Bewertungen",
+    "startNav": "Navigation Starten"
   },
 
   "Favourites": {
@@ -29,7 +34,9 @@
     "loginOrSignup": "Anmelden oder Registrieren",
     "loading": "Wird Geladen",
     "noFavourites": "Sie Haben Noch Keine Lieblingsprodukte",
-    "aboutProduct": "Informationen Über {product}"
+    "aboutProduct": "Informationen Über {product}",
+    "reviews": "Bewertungen",
+    "startNav": "Navigation Starten"
   },
 
   "Profile": {
@@ -51,6 +58,8 @@
   },
 
   "Other":{
-    "appLang": "Die Sprache der Bewerbung ist Deutsch"
+    "appLang": "Die Sprache der Bewerbung ist Deutsch",
+    "showDir": "Wegbeschreibung Anzeigen",
+    "hideDir": "Wegbeschreibung Verbergen"
   }
 }

@@ -8,7 +8,9 @@
     "searchingProducts": "Åtkomst till Produkter Runt Dig",
     "addFav": "Lägg till i Favoriter",
     "removeFav": "Ta Bort från Favoriter",
-    "aboutProduct": "Information om {product}"
+    "aboutProduct": "Information om {product}",
+    "reviews": "Recensioner",
+    "startNav": "Starta Navigering"
   },
 
   "Search": {
@@ -20,7 +22,9 @@
     "searchingProducts": "Åtkomst till Produkter Runt Dig",
     "addFav": "Lägg till i Favoriter",
     "removeFav": "Ta Bort från Favoriter",
-    "aboutProduct": "Information om {product}"
+    "aboutProduct": "Information om {product}",
+    "reviews": "Recensioner",
+    "startNav": "Starta Navigering"
   },
 
   "Favourites": {
@@ -29,7 +33,9 @@
     "loginOrSignup": "Logga In eller Registrera",
     "loading": "Laddar",
     "noFavourites": "Du Har Inga Favoritprodukter Ännu",
-    "aboutProduct": "Information om {product}"
+    "aboutProduct": "Information om {product}",
+    "reviews": "Recensioner",
+    "startNav": "Starta Navigering"
   },
 
   "Profile": {
@@ -50,6 +56,8 @@
     "logoutSuccess": "Utloggning Framgångsrik"
   },
   "Other": {
-    "appLang": "Appens språk är Svenska"
+    "appLang": "Appens språk är Svenska",
+    "showDir": "Visa Vägbeskrivning",
+    "hideDir": "Dölj Vägbeskrivning"
   }
 }

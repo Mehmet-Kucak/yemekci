@@ -8,7 +8,9 @@
     "searchingProducts": "Çevrenizdeki Ürünlere Ulaşılıyor",
     "addFav": "Favorilere Ekle",
     "removeFav": "Favorilerden Çıkar",
-    "aboutProduct": "{product} Hakkında Bilgiler"
+    "aboutProduct": "{product} Hakkında Bilgiler",
+    "reviews": "Yorumlar",
+    "startNav": "Navigasyonu Başlat"
   },
 
   "Search":{
@@ -20,7 +22,9 @@
     "searchingProducts": "Çevrenizdeki Ürünlere Ulaşılıyor",
     "addFav": "Favorilere Ekle",
     "removeFav": "Favorilerden Çıkar",
-    "aboutProduct": "{product} Hakkında Bilgiler"
+    "aboutProduct": "{product} Hakkında Bilgiler",
+    "reviews": "Yorumlar",
+    "startNav": "Navigasyonu Başlat"
   },
 
   "Favourites":{
@@ -29,7 +33,9 @@
     "loginOrSignup": "Giriş Yap veya Kayıt Ol",
     "loading": "Yükleniyor",
     "noFavourites": "Henüz Favori Ürününüz Bulunmamaktadır",
-    "aboutProduct": "{product} Hakkında Bilgiler"
+    "aboutProduct": "{product} Hakkında Bilgiler",
+    "reviews": "Yorumlar",
+    "startNav": "Navigasyonu Başlat"
   },
 
   "Profile":{
@@ -51,6 +57,8 @@
   },
 
   "Other":{
-    "appLang": "Uygulamanın dili Türkçe"
+    "appLang": "Uygulamanın dili Türkçe",
+    "showDir": "Yönleri Göster",
+    "hideDir": "Yönleri Gizle"
   }
 }

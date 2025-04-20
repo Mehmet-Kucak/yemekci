@@ -1,4 +1,60 @@
-.container {
+.wrapper {
+  position: fixed;
+  top: 50px;
   width: 100%;
   height: 100%;
+}
+
+.mapContainer {
+  position: relative; /* creates a stacking context */
+  z-index: 1; /* low layer */
+}
+
+/* Toggle button fixed at top */
+.header {
+  position: fixed;
+  top: 52px; /* below the header */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 50px;
+  background: rgb(244, 253, 248);
+  outline: 2px solid rgba(150, 150, 150, 1);
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+}
+.header > button {
+  width: 100%;
+  height: 100%;
+  color: black;
+}
+
+/* Toggle button */
+.toggleButton {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1rem;
+}
+
+/* Dropdown panel (hidden by default) */
+.dropdown {
+  position: fixed;
+  top: 102px;
+  left: 50%;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top;
+  width: 100%;
+  max-height: 60vh;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+  z-index: 999;
+}
+
+/* Panel open state */
+.dropdown.open {
+  transform: translateX(-50%) scaleY(1);
 }

@@ -8,7 +8,9 @@
     "searchingProducts": "Accessing Products Around You",
     "addFav": "Add to Favorites",
     "removeFav": "Remove from Favorites",
-    "aboutProduct": "Information About {product}"
+    "aboutProduct": "Information About {product}",
+    "reviews": "Reviews",
+    "startNav": "Start Navigation"
   },
 
   "Search": {
@@ -20,7 +22,9 @@
     "searchingProducts": "Accessing Products Around You",
     "addFav": "Add to Favorites",
     "removeFav": "Remove from Favorites",
-    "aboutProduct": "Information About {product}"
+    "aboutProduct": "Information About {product}",
+    "reviews": "Reviews",
+    "startNav": "Start Navigation"
   },
 
   "Favourites": {
@@ -29,7 +33,9 @@
     "loginOrSignup": "Log In or Sign Up",
     "loading": "Loading",
     "noFavourites": "You Have No Favorite Products Yet",
-    "aboutProduct": "Information About {product}"
+    "aboutProduct": "Information About {product}",
+    "reviews": "Reviews",
+    "startNav": "Start Navigation"
   },
 
   "Profile": {
@@ -51,6 +57,8 @@
   },
 
   "Other":{
-    "appLang": "The language of the application is English"
+    "appLang": "The language of the application is English",
+    "showDir": "Show Directions",
+    "hideDir": "Hide Directions"
   }
 }

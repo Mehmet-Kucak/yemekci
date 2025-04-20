@@ -8,7 +8,9 @@
     "searchingProducts": "Accès aux Produits Autour de Vous",
     "addFav": "Ajouter aux Favoris",
     "removeFav": "Retirer des Favoris",
-    "aboutProduct": "Informations Sur {product}"
+    "aboutProduct": "Informations Sur {product}",
+    "reviews": "Avis",
+    "startNav": "Démarrer la Navigation"
   },
 
   "Search": {
@@ -20,7 +22,9 @@
     "searchingProducts": "Accès aux Produits Autour de Vous",
     "addFav": "Ajouter aux Favoris",
     "removeFav": "Retirer des Favoris",
-    "aboutProduct": "Informations Sur {product}"
+    "aboutProduct": "Informations Sur {product}",
+    "reviews": "Avis",
+    "startNav": "Démarrer la Navigation"
   },
 
   "Favourites": {
@@ -29,7 +33,9 @@
     "loginOrSignup": "Se Connecter ou S'inscrire",
     "loading": "Chargement",
     "noFavourites": "Vous N'avez Pas Encore de Produits Favoris",
-    "aboutProduct": "Informations Sur {product}"
+    "aboutProduct": "Informations Sur {product}",
+    "reviews": "Avis",
+    "startNav": "Démarrer la Navigation"
   },
 
   "Profile": {
@@ -51,6 +57,8 @@
   },
 
   "Other":{
-    "appLang": "La langue de la candidature est le français"
+    "appLang": "La langue de la candidature est le français",
+    "showDir": "Afficher l’Itinéraire",
+    "hideDir": "Masquer l’Itinéraire"
   }
 }

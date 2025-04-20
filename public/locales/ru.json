@@ -8,7 +8,9 @@
     "searchingProducts": "Поиск Продуктов Вокруг Вас",
     "addFav": "Добавить в Избранное",
     "removeFav": "Удалить из Избранного",
-    "aboutProduct": "Информация о {product}"
+    "aboutProduct": "Информация о {product}",
+    "reviews": "Отзывы",
+    "startNav": "Начать Навигацию"
   },
 
   "Search": {
@@ -20,7 +22,9 @@
     "searchingProducts": "Поиск Продуктов Вокруг Вас",
     "addFav": "Добавить в Избранное",
     "removeFav": "Удалить из Избранного",
-    "aboutProduct": "Информация о {product}"
+    "aboutProduct": "Информация о {product}",
+    "reviews": "Отзывы",
+    "startNav": "Начать Навигацию"
   },
 
   "Favourites": {
@@ -29,7 +33,9 @@
     "loginOrSignup": "Войти или Зарегистрироваться",
     "loading": "Загрузка",
     "noFavourites": "У Вас Еще Нет Избранных Продуктов",
-    "aboutProduct": "Информация о {product}"
+    "aboutProduct": "Информация о {product}",
+    "reviews": "Отзывы",
+    "startNav": "Начать Навигацию"
   },
 
   "Profile": {
@@ -51,6 +57,8 @@
   },
 
   "Other":{
-    "appLang": "Язык приложения – русский"
+    "appLang": "Язык приложения – русский",
+    "showDir": "Показать Маршрут",
+    "hideDir": "Скрыть Маршрут"
   }
 }

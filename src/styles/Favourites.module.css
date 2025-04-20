@@ -195,3 +195,260 @@
   color: #0056b3;
   text-decoration: underline;
 }
+
+.place_preview {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.place_title {
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+
+  padding: 10px;
+  border-radius: 10px;
+  z-index: -1;
+}
+
+/* Carousel Wrapper */
+.carouselWrapper {
+  width: 100vw;
+  aspect-ratio: 1;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Slide Styling */
+.swiper-slide {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  object-fit: fill;
+}
+
+/* Image Styling */
+.slideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.carouselWrapper :global(.swiper-pagination-bullet) {
+  background-color: #111;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.carouselWrapper :global(.swiper-pagination-bullet-active) {
+  background-color: #111;
+  opacity: 1;
+}
+
+.carouselWrapper :global(.swiper-button-next),
+.carouselWrapper :global(.swiper-button-prev) {
+  color: #f0f0f0;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carouselWrapper :global(.swiper-button-next:hover),
+.carouselWrapper :global(.swiper-button-prev:hover) {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.place_info_text {
+  padding: 16px;
+  background-color: white;
+}
+
+.place_info_text img {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.place_info_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.place_distance_info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.place_distance_text {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.place_rating_info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.place_rating_value {
+  font-weight: 500;
+}
+
+.place_rating_count {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.reviews_container {
+  padding: 16px;
+}
+
+.reviews_title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* Custom Scroll Area */
+.custom_scroll_area {
+  height: 300px;
+  overflow-y: auto;
+  border-radius: 6px;
+  padding-right: 4px; /* Add some padding for the scrollbar */
+}
+
+/* Custom scrollbar styling */
+.custom_scroll_area::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom_scroll_area::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.custom_scroll_area::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.custom_scroll_area::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+.reviews_list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.review_card {
+  padding: 12px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.review_content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* Custom Avatar */
+.review_avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: #4b5563;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.avatar_image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.review_details {
+  flex: 1;
+}
+
+.review_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.reviewer_name {
+  font-weight: 500;
+}
+
+.review_date {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.review_stars {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.star_icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.review_text {
+  text-align: start;
+  font-size: 14px;
+  color: #374151;
+  margin: 0;
+}
+
+.place_nav_button {
+  padding: 10px 20px;
+  color: white;
+  background-color: #f00;
+  border: none;
+  border-radius: 40px;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.place_nav_button:hover {
+  background-color: #d00;
+}
+.place_nav_button img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}

@@ -1,86 +1,101 @@
-import { useRef, useEffect } from "react";
-import mapboxgl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
-import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
-import "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css";
-import styles from "@styles/DynamicMap.module.css";
+"use client";
 
-interface MapProps {
-  start: [number, number];
-  end: [number, number];
+import React, { use, useCallback, useEffect, useRef, useState } from "react";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  DirectionsService,
+  DirectionsRenderer,
+} from "@react-google-maps/api";
+import styles from "@styles/DynamicMap.module.css";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/router";
+
+interface CoordsDirectionsProps {
+  origin: { lat: number; lng: number };
+  destination: { lat: number; lng: number };
+  travelMode?: google.maps.TravelMode;
+  mapCenter?: { lat: number; lng: number };
+  mapZoom?: number;
 }
 
-const Map: React.FC<MapProps> = ({ start, end }) => {
-  const mapContainer = useRef<HTMLDivElement | null>(null);
-  const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+export default function CoordsDirections({
+  origin,
+  destination,
+  travelMode = google.maps.TravelMode.DRIVING,
+  mapCenter = {
+    lat: (origin.lat + destination.lat) / 2,
+    lng: (origin.lng + destination.lng) / 2,
+  },
+  mapZoom = 7,
+}: CoordsDirectionsProps) {
+  const router = useRouter();
 
-  useEffect(() => {
-    if (mapContainer.current && mapboxToken) {
-      mapboxgl.accessToken = mapboxToken;
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.NEXT_GOOGLE_MAPS_API_KEY!,
+    libraries: ["places", "geometry"],
+  });
 
-      const map = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: "mapbox://styles/mapbox/streets-v11",
-        center: start,
-        zoom: 12,
-      });
+  const [directions, setDirections] =
+    useState<google.maps.DirectionsResult | null>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const [showPanel, setShowPanel] = useState(false);
+  const t = useTranslations("Other");
 
-      map.on("load", () => {
-        const directions = new MapboxDirections({
-          accessToken: mapboxToken,
-          unit: "metric",
-          profile: "mapbox/driving",
-          controls: {
-            inputs: false,
-            instructions: false,
-            profileSwitcher: false,
-          },
-          interactive: false,
-          language: "tr",
-        } as any);
+  const onDirectionsCallback = useCallback(
+    (
+      result: google.maps.DirectionsResult | null,
+      status: google.maps.DirectionsStatus
+    ) => {
+      if (status === google.maps.DirectionsStatus.OK && result) {
+        setDirections(result);
+      } else {
+        console.error("Directions request failed:", status);
+      }
+    },
+    []
+  );
 
-        map.addControl(directions, "top-left");
+  if (!isLoaded) return <p>Loading map…</p>;
 
-        directions.setOrigin(start);
-        directions.setDestination(end);
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.header}>
+        <button
+          className={styles.toggleButton}
+          onClick={() => setShowPanel((prev) => !prev)}
+        >
+          {showPanel ? t("hideDir") : t("showDir")}
+        </button>
+      </div>
 
-        // Disable the inputs for origin and destination
-        const originInput = document.querySelector(
-          ".mapbox-directions-origin input"
-        ) as HTMLInputElement;
-        const destinationInput = document.querySelector(
-          ".mapbox-directions-destination input"
-        ) as HTMLInputElement;
+      <div
+        ref={panelRef}
+        className={`${styles.dropdown} ${showPanel ? styles.open : ""}`}
+      />
 
-        if (originInput) {
-          originInput.disabled = true;
-        }
-
-        if (destinationInput) {
-          destinationInput.disabled = true;
-        }
-      });
-
-      map.addControl(new mapboxgl.NavigationControl());
-      map.addControl(
-        new mapboxgl.GeolocateControl({
-          positionOptions: {
-            enableHighAccuracy: true,
-          },
-          trackUserLocation: true,
-          showUserLocation: true,
-        })
-      );
-      map.dragRotate.disable();
-      map.touchZoomRotate.disableRotation();
-
-      return () => {
-        map.remove();
-      };
-    }
-  }, [start, end, mapboxToken]);
-
-  return <div ref={mapContainer} className={styles.container} />;
-};
-
-export default Map;
+      <GoogleMap
+        mapContainerStyle={{ width: "100%", height: "100%" }}
+        center={mapCenter}
+        zoom={mapZoom}
+        mapContainerClassName="mapContainer"
+        options={{
+          gestureHandling: "greedy",
+          disableDefaultUI: true,
+        }}
+      >
+        {!directions && (
+          <DirectionsService
+            options={{ origin, destination, travelMode }}
+            callback={onDirectionsCallback}
+          />
+        )}
+        {directions && panelRef.current && (
+          <DirectionsRenderer
+            options={{ directions, panel: panelRef.current! }}
+          />
+        )}
+      </GoogleMap>
+    </div>
+  );
+}

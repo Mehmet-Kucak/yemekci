@@ -8,7 +8,9 @@
     "searchingProducts": "Accesso ai Prodotti Intorno a Te",
     "addFav": "Aggiungi ai Preferiti",
     "removeFav": "Rimuovi dai Preferiti",
-    "aboutProduct": "Informazioni su {product}"
+    "aboutProduct": "Informazioni su {product}",
+    "reviews": "Recensioni",
+    "startNav": "Avvia Navigazione"
   },
 
   "Search": {
@@ -20,7 +22,9 @@
     "searchingProducts": "Accesso ai Prodotti Intorno a Te",
     "addFav": "Aggiungi ai Preferiti",
     "removeFav": "Rimuovi dai Preferiti",
-    "aboutProduct": "Informazioni su {product}"
+    "aboutProduct": "Informazioni su {product}",
+    "reviews": "Recensioni",
+    "startNav": "Avvia Navigazione"
   },
 
   "Favourites": {
@@ -29,7 +33,9 @@
     "loginOrSignup": "Accedi o Registrati",
     "loading": "Caricamento",
     "noFavourites": "Non Hai Ancora Prodotti Preferiti",
-    "aboutProduct": "Informazioni su {product}"
+    "aboutProduct": "Informazioni su {product}",
+    "reviews": "Recensioni",
+    "startNav": "Avvia Navigazione"
   },
 
   "Profile": {
@@ -50,6 +56,8 @@
     "logoutSuccess": "Disconnessione Riuscita"
   },
   "Other": {
-    "appLang": "La lingua dell'app è Italiano"
+    "appLang": "La lingua dell'app è Italiano",
+    "showDir": "Mostra Indicazioni",
+    "hideDir": "Nascondi Indicazioni"
   }
 }

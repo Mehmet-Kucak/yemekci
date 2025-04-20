@@ -21,6 +21,12 @@ import { useRouter } from "next/router";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { useTranslations } from "next-intl";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation as SwiperNavigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
 type DocumentData = {
   id: string;
   name: string;
@@ -36,7 +42,9 @@ const Home = () => {
   const [searchType, setSearchType] = useState<number>(0); // 0: not searchType, 1: searchType with location, 2: searcing without location
   const [searchState, setSearchState] = useState<number>(0); // 0: not searching, 1: searching location, 2: searching products, 3: searching images
   const [selectedProduct, setSelectedProduct] = useState<number>(-1);
+  const [places, setPlaces] = useState<google.maps.places.Place[]>([]);
   const [selectedPlace, setSelectedPlace] = useState<number>(-1);
+  const [startNav, setStartNav] = useState(false);
   const [currUser, setCurrUser] = useState<User | null>(null);
   const [userData, setUserData] = useState<any>(null);
   const router = useRouter();
@@ -69,20 +77,113 @@ const Home = () => {
     if (mainRef.current) {
       mainRef.current.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }, [selectedProduct, selectedPlace]);
+
+    if (selectedProduct !== -1) {
+      (async () => {
+        const { Place } = (await google.maps.importLibrary(
+          "places"
+        )) as google.maps.PlacesLibrary;
+
+        const request = {
+          textQuery:
+            "restaurant with " + data[selectedProduct].name + " in " + city[1],
+          fields: [
+            "displayName",
+            "id",
+            "location",
+            "photos",
+            "rating",
+            "userRatingCount",
+            "reviews",
+          ],
+          includedType: "restaurant",
+          locationBias: { lat: position[0], lng: position[1] },
+        };
+
+        const { places } = await Place.searchByText(request);
+        //console.log(places);
+        setPlaces(places);
+      })();
+    } else {
+      //console.log("Selected product is -1, skipping Places API call.");
+    }
+  }, [selectedProduct]);
+
+  const getDistanceInKm = (
+    from: google.maps.LatLngLiteral,
+    to: google.maps.LatLngLiteral
+  ) => {
+    const fromLatLng = new google.maps.LatLng(from.lat, from.lng);
+    const toLatLng = new google.maps.LatLng(to.lat, to.lng);
+    const distanceInMeters =
+      google.maps.geometry.spherical.computeDistanceBetween(
+        fromLatLng,
+        toLatLng
+      );
+    return distanceInMeters / 1000; // in kilometers
+  };
 
   const getProducts = async () => {
-    if (navigator.geolocation) {
-      try {
-        const position = await new Promise<GeolocationPosition>(
-          (resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject);
+    function getAccuratePosition(
+      threshold = 30, // target accuracy in meters
+      maxWait = 20000 // maximum wait time in ms
+    ): Promise<GeolocationPosition> {
+      return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+          return reject(new Error("Geolocation not supported"));
+        }
+
+        let bestPosition: GeolocationPosition | null = null;
+        let watchId: number;
+
+        const timeoutId = setTimeout(() => {
+          navigator.geolocation.clearWatch(watchId);
+          if (bestPosition) {
+            console.warn("Returning best available position (timeout).");
+            resolve(bestPosition);
+          } else {
+            reject(new Error("Timeout and no position available"));
+          }
+        }, maxWait);
+
+        watchId = navigator.geolocation.watchPosition(
+          (pos) => {
+            console.log(`Accuracy: ${pos.coords.accuracy} m`);
+            if (
+              !bestPosition ||
+              pos.coords.accuracy < bestPosition.coords.accuracy
+            ) {
+              bestPosition = pos;
+            }
+
+            if (pos.coords.accuracy <= threshold) {
+              clearTimeout(timeoutId);
+              navigator.geolocation.clearWatch(watchId);
+              resolve(pos);
+            }
+          },
+          (err) => {
+            clearTimeout(timeoutId);
+            navigator.geolocation.clearWatch(watchId);
+            reject(err);
+          },
+          {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: maxWait,
           }
         );
-        const lat = await position.coords.latitude;
-        const lng = await position.coords.longitude;
+      });
+    }
 
-        await setPosition([lat, lng]);
+    if (navigator.geolocation) {
+      try {
+        const position = await getAccuratePosition(100, 10000);
+        const { latitude: lat, longitude: lng } = position.coords;
+
+        console.log(lat, lng);
+        setPosition([lat, lng]);
+
         const response = await fetch(`/api/getLocation?lat=${lat}&lng=${lng}`);
         const responseData = await response.json();
 
@@ -144,6 +245,8 @@ const Home = () => {
   const searchButton = () => {
     setSelectedProduct(-1);
     setSelectedPlace(-1);
+    setStartNav(false);
+    setDesc("");
     setSearchType(1);
     setSearchState(1);
     getProducts();
@@ -152,18 +255,27 @@ const Home = () => {
   const productButton = async (product: number) => {
     await setSelectedProduct(product);
     setDesc("");
+    setSelectedPlace(-1);
+    setStartNav(false);
     await fetchDescription(product);
   };
 
   const placeButton = (index: number) => {
     setSelectedPlace(index);
+    setStartNav(false);
+  };
+
+  const navButton = () => {
+    setStartNav(true);
   };
 
   const backButton = () => {
     if (selectedPlace === -1 && selectedProduct === -1) {
       router.back();
     }
-    if (selectedPlace !== -1) {
+    if (startNav) {
+      setStartNav(false);
+    } else if (selectedPlace !== -1) {
       setSelectedPlace(-1);
     } else {
       setSelectedProduct(-1);
@@ -229,7 +341,7 @@ const Home = () => {
         </button>
       </header>
       <main className={styles.main} ref={mainRef}>
-        {selectedProduct === -1 && selectedPlace === -1 && (
+        {selectedProduct === -1 && selectedPlace === -1 && !startNav && (
           <>
             {data.length === 0 ? (
               <h2 className={styles.title}>
@@ -278,7 +390,7 @@ const Home = () => {
             </div>
           </>
         )}
-        {selectedProduct !== -1 && selectedPlace === -1 && (
+        {selectedProduct !== -1 && selectedPlace === -1 && !startNav && (
           <>
             <h2 className={styles.title}>
               <span>{data[selectedProduct].name}</span>
@@ -312,78 +424,179 @@ const Home = () => {
             </div>
             <hr />
             <div className={styles.places_container}>
-              <PlaceCard
-                name="Kalyon Lazutti Çöpşiş"
-                img="/restaurant_placeholder.jpg"
-                stars={4.4}
-                reviews={1292}
-                distance={2.6}
-                on_click={() => {
-                  placeButton(3);
-                }}
-              />
-              <PlaceCard
-                name="Efe Çöp Şiş"
-                img="/restaurant_placeholder.jpg"
-                stars={4.3}
-                reviews={1349}
-                distance={2.6}
-                on_click={() => {
-                  placeButton(2);
-                }}
-              />
-              <PlaceCard
-                name="Meşhur ortaklar çöp şiş servet usta"
-                img="/restaurant_placeholder.jpg"
-                stars={4.3}
-                reviews={467}
-                distance={2.6}
-                on_click={() => {
-                  placeButton(1);
-                }}
-              />
-              <PlaceCard
-                name="Park Çöp Şiş"
-                img="/restaurant_placeholder.jpg"
-                stars={4.0}
-                reviews={110}
-                distance={1.2}
-                on_click={() => {
-                  placeButton(4);
-                }}
-              />
-              <PlaceCard
-                name="Ortaklar Cop Sis Kofte Kahvalti Gozleme"
-                img="/restaurant_placeholder.jpg"
-                stars={3.9}
-                reviews={13}
-                distance={2.7}
-                on_click={() => {
-                  placeButton(0);
-                }}
-              />
-              <PlaceCard
-                name="Yörük Ali Baba Çöp Şiş"
-                img="/restaurant_placeholder.jpg"
-                stars={3.6}
-                reviews={46}
-                distance={0.8}
-                on_click={() => {
-                  placeButton(5);
-                }}
-              />
+              {places.map((p, i) => (
+                <PlaceCard
+                  key={i}
+                  name={p.displayName! || "Unknown Place"}
+                  img={
+                    typeof p.photos?.[0]?.getURI === "function"
+                      ? p.photos[0].getURI()
+                      : "/noImg.svg"
+                  }
+                  stars={p.rating || 0}
+                  reviews={p.userRatingCount || 0}
+                  distance={
+                    Math.round(
+                      getDistanceInKm(
+                        { lat: position[0], lng: position[1] },
+                        {
+                          lat: p.location?.lat() || 0,
+                          lng: p.location?.lng() || 0,
+                        }
+                      ) * 10
+                    ) / 10
+                  }
+                  on_click={() => placeButton(i)}
+                />
+              ))}
             </div>
           </>
         )}
-        {selectedPlace !== -1 && (
+        {selectedPlace !== -1 && !startNav && (
           <>
-            <div className={styles.map_container}>
-              <Map
-                start={[position[1], position[0]]}
-                end={[27.5065, 37.8839]}
-              />
+            <div className={styles.place_preview}>
+              <h2 className={styles.place_title}>
+                <span>{places[selectedPlace].displayName}</span>
+                <br />
+              </h2>
+              <div className={styles.place_info}>
+                {
+                  <div className={styles.carouselWrapper}>
+                    <Swiper
+                      modules={[SwiperNavigation, Pagination]}
+                      spaceBetween={10}
+                      slidesPerView={1}
+                      loop={true}
+                      autoplay={{ delay: 3000, disableOnInteraction: false }}
+                      navigation
+                      pagination={{ clickable: true }}
+                      style={{
+                        width: "100%",
+                        aspectRatio: "1",
+                      }}
+                    >
+                      {places[selectedPlace].photos?.map((photo, idx) => {
+                        const src = photo.getURI();
+                        return (
+                          <SwiperSlide key={idx}>
+                            <div className={styles.slide}>
+                              <img
+                                src={src}
+                                alt={`Place photo ${idx + 1}`}
+                                className={styles.slideImage}
+                              />
+                            </div>
+                          </SwiperSlide>
+                        );
+                      })}
+                    </Swiper>
+                  </div>
+                }
+                <div className={styles.place_info_text}>
+                  <div className={styles.place_info_row}>
+                    <div className={styles.place_distance_info}>
+                      <img src="/direction_icon.svg" alt="" />
+                      <span className={styles.place_distance_text}>
+                        {Math.round(
+                          getDistanceInKm(
+                            { lat: position[0], lng: position[1] },
+                            {
+                              lat: places[selectedPlace].location?.lat() || 0,
+                              lng: places[selectedPlace].location?.lng() || 0,
+                            }
+                          ) * 10
+                        ) / 10}{" "}
+                        km
+                      </span>
+                    </div>
+                    <div className={styles.place_rating_info}>
+                      <img src="/fullstar_icon.svg" alt="" />
+                      <span className={styles.place_rating_value}>
+                        {places[selectedPlace].rating}
+                      </span>
+                      <span className={styles.place_rating_count}>
+                        ({places[selectedPlace].userRatingCount})
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.reviews_container}>
+                  <h2 className={styles.reviews_title}>{t("reviews")}</h2>
+                  <div className={styles.custom_scroll_area}>
+                    <div className={styles.reviews_list}>
+                      {places[selectedPlace].reviews?.map((review, index) => (
+                        <div key={index} className={styles.review_card}>
+                          <div className={styles.review_content}>
+                            <div className={styles.review_avatar}>
+                              {review.authorAttribution?.photoURI ? (
+                                <img
+                                  src={
+                                    review.authorAttribution.photoURI ||
+                                    "/placeholder.svg"
+                                  }
+                                  alt={"User Avatar"}
+                                  width={40}
+                                  height={40}
+                                  className={styles.avatar_image}
+                                />
+                              ) : null}
+                            </div>
+                            <div className={styles.review_details}>
+                              <div className={styles.review_header}>
+                                <span className={styles.reviewer_name}>
+                                  {review.authorAttribution?.displayName ||
+                                    "Unknown User"}
+                                </span>
+                                <span className={styles.review_date}>
+                                  {review.relativePublishTimeDescription ||
+                                    "Unknown Date"}
+                                </span>
+                              </div>
+                              <div className={styles.review_stars}>
+                                {[...Array(5)].map((_, i) => (
+                                  <img
+                                    key={i}
+                                    src={
+                                      i < (review.rating ?? 0)
+                                        ? "/fullstar_icon.svg"
+                                        : "/fullstar_white_icon.svg"
+                                    }
+                                    alt="Star"
+                                    className={styles.star_icon}
+                                  />
+                                ))}
+                              </div>
+                              <p className={styles.review_text}>
+                                {review.text}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <button className={styles.place_nav_button} onClick={navButton}>
+                  <img src="/nav_icon.svg" alt="" />
+                  {t("startNav")}
+                </button>
+              </div>
             </div>
           </>
+        )}
+        {startNav && selectedPlace !== -1 && (
+          <Map
+            origin={{
+              lat: position[0],
+              lng: position[1],
+            }}
+            destination={{
+              lat: places[selectedPlace].location?.lat() || 0,
+              lng: places[selectedPlace].location?.lng() || 0,
+            }}
+          />
         )}
       </main>
       <BottomNavbar

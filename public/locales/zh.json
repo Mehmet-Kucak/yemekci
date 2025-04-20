@@ -8,7 +8,9 @@
     "searchingProducts": "访问您周围的产品",
     "addFav": "添加到收藏夹",
     "removeFav": "从收藏夹中移除",
-    "aboutProduct": "关于 {product} 的信息"
+    "aboutProduct": "关于 {product} 的信息",
+    "reviews": "评论",
+    "startNav": "开始导航"
   },
 
   "Search": {
@@ -20,7 +22,9 @@
     "searchingProducts": "访问您周围的产品",
     "addFav": "添加到收藏夹",
     "removeFav": "从收藏夹中移除",
-    "aboutProduct": "关于 {product} 的信息"
+    "aboutProduct": "关于 {product} 的信息",
+    "reviews": "评论",
+    "startNav": "开始导航"
   },
 
   "Favourites": {
@@ -29,7 +33,9 @@
     "loginOrSignup": "登录或注册",
     "loading": "加载中",
     "noFavourites": "您还没有收藏产品",
-    "aboutProduct": "关于 {product} 的信息"
+    "aboutProduct": "关于 {product} 的信息",
+    "reviews": "评论",
+    "startNav": "开始导航"
   },
 
   "Profile": {
@@ -50,6 +56,8 @@
     "logoutSuccess": "登出成功"
   },
   "Other": {
-    "appLang": "应用语言为简体中文"
+    "appLang": "应用语言为简体中文",
+    "showDir": "显示路线",
+    "hideDir": "隐藏路线"
   }
 }

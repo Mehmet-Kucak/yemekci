@@ -21,3 +21,10 @@
   height: 100%;
   width: 100%;
 }
+
+.disabled path {
+  fill: #808080;
+  stroke: #808080;
+  height: 100%;
+  width: 100%;
+}

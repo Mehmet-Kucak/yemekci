@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@mapbox/mapbox-gl-directions": "^4.3.1",
+    "@react-google-maps/api": "^2.20.6",
     "@turf/turf": "^6.5.0",
     "@types/react-map-gl": "^6.1.6",
     "firebase": "^10.12.2",
@@ -25,9 +26,11 @@
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.2.1",
     "react-map-gl": "^7.1.7",
+    "swiper": "^11.2.6",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.58.1",
     "@types/leaflet": "^1.9.12",
     "@types/node": "^20",
     "@types/react": "^18",

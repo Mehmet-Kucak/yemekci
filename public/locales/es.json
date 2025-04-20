@@ -8,7 +8,9 @@
     "searchingProducts": "Accediendo a Productos Cerca de Ti",
     "addFav": "Agregar a Favoritos",
     "removeFav": "Eliminar de Favoritos",
-    "aboutProduct": "Información Sobre {product}"
+    "aboutProduct": "Información Sobre {product}",
+    "reviews": "Reseñas",
+    "startNav": "Iniciar Navegación"
   },
 
   "Search": {
@@ -20,7 +22,9 @@
     "searchingProducts": "Accediendo a Productos Cerca de Ti",
     "addFav": "Agregar a Favoritos",
     "removeFav": "Eliminar de Favoritos",
-    "aboutProduct": "Información Sobre {product}"
+    "aboutProduct": "Información Sobre {product}",
+    "reviews": "Reseñas",
+    "startNav": "Iniciar Navegación"
   },
 
   "Favourites": {
@@ -29,7 +33,9 @@
     "loginOrSignup": "Iniciar Sesión o Registrarse",
     "loading": "Cargando",
     "noFavourites": "Aún No Tienes Productos Favoritos",
-    "aboutProduct": "Información Sobre {product}"
+    "aboutProduct": "Información Sobre {product}",
+    "reviews": "Reseñas",
+    "startNav": "Iniciar Navegación"
   },
 
   "Profile": {
@@ -51,6 +57,8 @@
   },
 
   "Other":{
-    "appLang": "El idioma de la aplicación es el español"
+    "appLang": "El idioma de la aplicación es el español",
+    "showDir": "Mostrar Direcciones",
+    "hideDir": "Ocultar Direcciones"
   }
 }
