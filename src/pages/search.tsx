@@ -81,7 +81,9 @@ const Search = () => {
     if (mainRef.current) {
       mainRef.current.scrollTo({ top: 0, behavior: "smooth" });
     }
+  }, [selectedProduct, selectedPlace]);
 
+  useEffect(() => {
     if (selectedProduct !== -1) {
       (async () => {
         const { Place } = (await google.maps.importLibrary(
@@ -89,8 +91,7 @@ const Search = () => {
         )) as google.maps.PlacesLibrary;
 
         const request = {
-          textQuery:
-            "restaurant with " + data[selectedProduct].name + " in " + city[1],
+          textQuery: "" + data[selectedProduct].name + " in " + city[1],
           fields: [
             "displayName",
             "id",
@@ -100,7 +101,6 @@ const Search = () => {
             "userRatingCount",
             "reviews",
           ],
-          includedType: "restaurant",
         };
 
         const { places } = await Place.searchByText(request);
@@ -355,6 +355,7 @@ const Search = () => {
               name="Cities"
               className={styles.city_dropdown}
               onChange={onCityChange}
+              value={city[0]}
             >
               {cityData.map((city, index) => {
                 return (
@@ -609,6 +610,9 @@ const Search = () => {
         onSearchClick={() => {
           setSelectedProduct(-1);
           setSelectedPlace(-1);
+          setDesc("");
+          setStartNav(false);
+          setSearchType(0);
         }}
         onLocationClick={searchButton}
         onFavsClick={() => {

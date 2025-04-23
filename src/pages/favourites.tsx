@@ -72,7 +72,9 @@ const Favourites = () => {
     if (mainRef.current) {
       mainRef.current.scrollTo({ top: 0, behavior: "smooth" });
     }
+  }, [selectedProduct, selectedPlace]);
 
+  useEffect(() => {
     if (selectedProduct !== -1) {
       (async () => {
         const { Place } = (await google.maps.importLibrary(
@@ -81,7 +83,7 @@ const Favourites = () => {
 
         const request = {
           textQuery:
-            "restaurant with " +
+            "" +
             data[selectedProduct].name +
             " in " +
             data[selectedProduct].province,
@@ -94,7 +96,6 @@ const Favourites = () => {
             "userRatingCount",
             "reviews",
           ],
-          includedType: "restaurant",
         };
 
         const { places } = await Place.searchByText(request);
@@ -504,6 +505,8 @@ const Favourites = () => {
         onFavsClick={() => {
           setSelectedProduct(-1);
           setSelectedPlace(-1);
+          setDesc("");
+          setStartNav(false);
         }}
         onIntClick={() => {
           router.push("/int");
