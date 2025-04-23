@@ -355,7 +355,7 @@ const Search = () => {
               name="Cities"
               className={styles.city_dropdown}
               onChange={onCityChange}
-              value={city[0]}
+              value={Number(city[0])}
             >
               {cityData.map((city, index) => {
                 return (
