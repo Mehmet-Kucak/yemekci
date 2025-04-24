@@ -57,6 +57,28 @@
     "logoutSuccess": "Erfolgreich Abgemeldet"
   },
 
+  "FirebaseConfig": {
+    "signUpError1": "Der Benutzername muss zwischen 3 und 20 Zeichen lang sein.",
+    "signUpError2": "Benutzernamen dürfen keine Leerzeichen enthalten.",
+    "signUpError3": "Benutzernamen dürfen nur Buchstaben, Zahlen, Bindestriche und Unterstriche enthalten.",
+    "signUpError4": "Der Benutzername ist bereits vergeben.",
+    "signUpError5": "Passwörter stimmen nicht überein.",
+    "signOutError": "Fehler beim Abmelden. Bitte versuchen Sie es später erneut.",
+    "authError1": "E-Mail-Adresse wird bereits verwendet.",
+    "authError2": "Ungültige E-Mail-Adresse.",
+    "authError3": "Das Passwort ist zu schwach.",
+    "authError4": "Dieses Konto wurde deaktiviert.",
+    "authError5": "Falscher Benutzername oder falsches Passwort.",
+    "authError6": "Kein Benutzer mit dieser E-Mail-Adresse gefunden.",
+    "authError7": "Zu viele Anmeldeversuche. Bitte versuchen Sie es später erneut.",
+    "authError8": "Anmeldung mit dieser Methode ist nicht erlaubt.",
+    "authError9": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
+    "addFavSuccess": "Produkt zu Favoriten hinzugefügt!",
+    "addFavError": "Fehler beim Hinzufügen des Produkts zu den Favoriten. Bitte versuchen Sie es später erneut.",
+    "removeFavSuccess": "Produkt aus Favoriten entfernt!",
+    "removeFavError": "Fehler beim Entfernen des Produkts aus den Favoriten. Bitte versuchen Sie es später erneut."
+  },
+
   "Other":{
     "appLang": "Die Sprache der Bewerbung ist Deutsch",
     "showDir": "Wegbeschreibung Anzeigen",

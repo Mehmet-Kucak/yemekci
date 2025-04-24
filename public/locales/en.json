@@ -56,6 +56,28 @@
     "logoutSuccess": "Logged out Successfully"
   },
 
+  "FirebaseConfig": {
+    "signUpError1": "Username must be between 3 and 20 characters.",
+    "signUpError2": "Usernames must not contain spaces.",
+    "signUpError3": "Usernames must be letters, numbers, dashes, and underscores only.",
+    "signUpError4": "The username has already been taken.",
+    "signUpError5": "Passwords do not match.",
+    "signOutError": "Error signing out. Please try again later.",
+    "authError1": "Email address is already in use.",
+    "authError2": "Invalid email address.",
+    "authError3": "Password is too weak.",
+    "authError4": "This account has been disabled.",
+    "authError5": "Incorrect username or password.",
+    "authError6": "No user found with this email address.",
+    "authError7": "Too many sign-in attempts. Please try again later.",
+    "authError8": "Sign-in is not allowed for this method.",
+    "authError9": "An error occurred. Please try again later.",
+    "addFavSuccess": "Product added to favorites!",
+    "addFavError": "Error adding product to favorites. Please try again later.",
+    "removeFavSuccess": "Product removed from favorites!",
+    "removeFavError": "Error removing product from favorites. Please try again later."
+  },
+
   "Other":{
     "appLang": "The language of the application is English",
     "showDir": "Show Directions",

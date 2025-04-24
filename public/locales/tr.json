@@ -56,6 +56,28 @@
     "logoutSuccess": "Başarıyla çıkış yapıldı"
   },
 
+  "FirebaseConfig": {
+    "signUpError1": "Kullanıcı adı 3 ile 20 karakter arasında olmalıdır.",
+    "signUpError2": "Kullanıcı adlarında boşluk olmamalıdır.",
+    "signUpError3": "Kullanıcı adları yalnızca harf, rakam, tire ve alt çizgi içerebilir.",
+    "signUpError4": "Bu kullanıcı adı zaten alınmış.",
+    "signUpError5": "Parolalar eşleşmiyor.",
+    "signOutError": "Çıkış yaparken hata oluştu. Lütfen daha sonra tekrar deneyin.",
+    "authError1": "E-posta adresi zaten kullanılıyor.",
+    "authError2": "Geçersiz e-posta adresi.",
+    "authError3": "Parola çok zayıf.",
+    "authError4": "Bu hesap devre dışı bırakıldı.",
+    "authError5": "Yanlış kullanıcı adı veya parola.",
+    "authError6": "Bu e-posta adresiyle kullanıcı bulunamadı.",
+    "authError7": "Çok fazla oturum açma denemesi. Lütfen daha sonra tekrar deneyin.",
+    "authError8": "Bu yöntemle oturum açmaya izin verilmiyor.",
+    "authError9": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+    "addFavSuccess": "Ürün favorilere eklendi!",
+    "addFavError": "Ürünü favorilere eklerken hata oluştu. Lütfen daha sonra tekrar deneyin.",
+    "removeFavSuccess": "Ürün favorilerden kaldırıldı!",
+    "removeFavError": "Ürünü favorilerden kaldırırken hata oluştu. Lütfen daha sonra tekrardeneyin."
+  },
+
   "Other":{
     "appLang": "Uygulamanın dili Türkçe",
     "showDir": "Yönleri Göster",

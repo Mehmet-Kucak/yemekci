@@ -55,6 +55,29 @@
     "signupSuccess": "Succesvol Geregistreerd",
     "logoutSuccess": "Succesvol Uitgelogd"
   },
+
+  "FirebaseConfig": {
+    "signUpError1": "Gebruikersnaam moet tussen de 3 en 20 tekens lang zijn.",
+    "signUpError2": "Gebruikersnamen mogen geen spaties bevatten.",
+    "signUpError3": "Gebruikersnamen mogen alleen letters, cijfers, streepjes en underscores bevatten.",
+    "signUpError4": "De gebruikersnaam is al in gebruik.",
+    "signUpError5": "Wachtwoorden komen niet overeen.",
+    "signOutError": "Fout bij het uitloggen. Probeer het later opnieuw.",
+    "authError1": "E-mailadres is al in gebruik.",
+    "authError2": "Ongeldig e-mailadres.",
+    "authError3": "Wachtwoord is te zwak.",
+    "authError4": "Dit account is uitgeschakeld.",
+    "authError5": "Onjuiste gebruikersnaam of wachtwoord.",
+    "authError6": "Geen gebruiker gevonden met dit e-mailadres.",
+    "authError7": "Te veel aanmeldpogingen. Probeer het later opnieuw.",
+    "authError8": "Aanmelden is niet toegestaan voor deze methode.",
+    "authError9": "Er is een fout opgetreden. Probeer het later opnieuw.",
+    "addFavSuccess": "Product toegevoegd aan favorieten!",
+    "addFavError": "Fout bij het toevoegen van product aan favorieten. Probeer het later opnieuw.",
+    "removeFavSuccess": "Product verwijderd uit favorieten!",
+    "removeFavError": "Fout bij het verwijderen van product uit favorieten. Probeer het later opnieuw."
+  },
+
   "Other": {
     "appLang": "De taal van de app is Nederlands",
     "showDir": "Route Tonen",

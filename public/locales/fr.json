@@ -56,6 +56,28 @@
     "logoutSuccess": "Déconnexion Réussie"
   },
 
+  "FirebaseConfig": {
+    "signUpError1": "Le nom d’utilisateur doit comporter entre 3 et 20 caractères.",
+    "signUpError2": "Les noms d’utilisateur ne doivent pas contenir d’espaces.",
+    "signUpError3": "Les noms d’utilisateur ne peuvent contenir que des lettres, des chiffres, des tirets et des underscores.",
+    "signUpError4": "Le nom d’utilisateur est déjà pris.",
+    "signUpError5": "Les mots de passe ne correspondent pas.",
+    "signOutError": "Erreur lors de la déconnexion. Veuillez réessayer plus tard.",
+    "authError1": "Adresse e-mail déjà utilisée.",
+    "authError2": "Adresse e-mail invalide.",
+    "authError3": "Le mot de passe est trop faible.",
+    "authError4": "Ce compte a été désactivé.",
+    "authError5": "Nom d’utilisateur ou mot de passe incorrect.",
+    "authError6": "Aucun utilisateur trouvé avec cette adresse e-mail.",
+    "authError7": "Trop de tentatives de connexion. Veuillez réessayer plus tard.",
+    "authError8": "La connexion n’est pas autorisée pour cette méthode.",
+    "authError9": "Une erreur est survenue. Veuillez réessayer plus tard.",
+    "addFavSuccess": "Produit ajouté aux favoris !",
+    "addFavError": "Erreur lors de l’ajout du produit aux favoris. Veuillez réessayer plus tard.",
+    "removeFavSuccess": "Produit retiré des favoris !",
+    "removeFavError": "Erreur lors de la suppression du produit des favoris. Veuillez réessayer plus tard."
+  },
+
   "Other":{
     "appLang": "La langue de la candidature est le français",
     "showDir": "Afficher l’Itinéraire",

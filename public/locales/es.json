@@ -56,6 +56,29 @@
     "logoutSuccess": "Cierre de Sesión Exitoso"
   },
 
+  
+  "FirebaseConfig": {
+    "signUpError1": "El nombre de usuario debe tener entre 3 y 20 caracteres.",
+    "signUpError2": "Los nombres de usuario no deben contener espacios.",
+    "signUpError3": "Los nombres de usuario solo pueden contener letras, números, guiones y guiones bajos.",
+    "signUpError4": "El nombre de usuario ya está en uso.",
+    "signUpError5": "Las contraseñas no coinciden.",
+    "signOutError": "Error al cerrar la sesión. Por favor, inténtalo de nuevo más tarde.",
+    "authError1": "La dirección de correo electrónico ya está en uso.",
+    "authError2": "Dirección de correo electrónico inválida.",
+    "authError3": "La contraseña es demasiado débil.",
+    "authError4": "Esta cuenta ha sido deshabilitada.",
+    "authError5": "Nombre de usuario o contraseña incorrectos.",
+    "authError6": "No se encontró un usuario con esta dirección de correo electrónico.",
+    "authError7": "Demasiados intentos de inicio de sesión. Por favor, inténtalo de nuevo más tarde.",
+    "authError8": "No se permite el inicio de sesión con este método.",
+    "authError9": "Ocurrió un error. Por favor, inténtalo de nuevo más tarde.",
+    "addFavSuccess": "¡Producto añadido a favoritos!",
+    "addFavError": "Error al añadir el producto a favoritos. Por favor, inténtalo de nuevo más tarde.",
+    "removeFavSuccess": "¡Producto eliminado de favoritos!",
+    "removeFavError": "Error al eliminar el producto de favoritos. Por favor, inténtalo de nuevo más tarde."
+  },
+
   "Other":{
     "appLang": "El idioma de la aplicación es el español",
     "showDir": "Mostrar Direcciones",

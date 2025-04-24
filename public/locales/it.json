@@ -55,6 +55,29 @@
     "signupSuccess": "Registrazione Riuscita",
     "logoutSuccess": "Disconnessione Riuscita"
   },
+
+  "FirebaseConfig": {
+    "signUpError1": "Il nome utente deve essere tra 3 e 20 caratteri.",
+    "signUpError2": "I nomi utente non devono contenere spazi.",
+    "signUpError3": "I nomi utente possono contenere solo lettere, numeri, trattini e underscore.",
+    "signUpError4": "Il nome utente è già stato preso.",
+    "signUpError5": "Le password non corrispondono.",
+    "signOutError": "Errore durante la disconnessione. Riprova più tardi.",
+    "authError1": "L’indirizzo email è già in uso.",
+    "authError2": "Indirizzo email non valido.",
+    "authError3": "La password è troppo debole.",
+    "authError4": "Questo account è stato disabilitato.",
+    "authError5": "Nome utente o password errati.",
+    "authError6": "Nessun utente trovato con questo indirizzo email.",
+    "authError7": "Troppi tentativi di accesso. Riprova più tardi.",
+    "authError8": "Accesso non consentito per questo metodo.",
+    "authError9": "Si è verificato un errore. Riprova più tardi.",
+    "addFavSuccess": "Prodotto aggiunto ai preferiti!",
+    "addFavError": "Errore durante l’aggiunta del prodotto ai preferiti. Riprova più tardi.",
+    "removeFavSuccess": "Prodotto rimosso dai preferiti!",
+    "removeFavError": "Errore durante la rimozione del prodotto dai preferiti. Riprova più tardi."
+  },
+
   "Other": {
     "appLang": "La lingua dell'app è Italiano",
     "showDir": "Mostra Indicazioni",

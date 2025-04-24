@@ -22,8 +22,20 @@ import {
 } from "firebase/firestore";
 //
 import { toast } from "react-hot-toast";
+import Router from "next/router";
+const tr = require("@public/locales/tr.json");
+const en = require("@public/locales/en.json");
+const de = require("@public/locales/en.json");
+const fr = require("@public/locales/en.json");
+const it = require("@public/locales/en.json");
+const nl = require("@public/locales/en.json");
+const sv = require("@public/locales/en.json");
+const es = require("@public/locales/en.json");
+const el = require("@public/locales/en.json");
+const ru = require("@public/locales/en.json");
+const ja = require("@public/locales/en.json");
+const zh = require("@public/locales/en.json");
 
-// Read readme for keys
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
@@ -33,6 +45,40 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_APP_ID,
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
 };
+
+const t = (text: string) => {
+  const lang = Router.locale;
+
+  switch (lang) {
+    case "tr":
+      return tr.FirebaseConfig[text] || text;
+    case "en":
+      return en.FirebaseConfig[text] || text;
+    case "de":
+      return de.FirebaseConfig[text] || text;
+    case "fr":
+      return fr.FirebaseConfig[text] || text;
+    case "it":
+      return it.FirebaseConfig[text] || text;
+    case "nl":
+      return nl.FirebaseConfig[text] || text;
+    case "sv":
+      return sv.FirebaseConfig[text] || text;
+    case "es":
+      return es.FirebaseConfig[text] || text;
+    case "el":
+      return el.FirebaseConfig[text] || text;
+    case "ru":
+      return ru.FirebaseConfig[text] || text;
+    case "ja":
+      return ja.FirebaseConfig[text] || text;
+    case "zh":
+      return zh.FirebaseConfig[text] || text;
+    default:
+      return en.FirebaseConfig[text] || text;
+  }
+};
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
@@ -54,21 +100,19 @@ export async function SignUp(
 
   try {
     if (username.length < 3 || username.length > 20) {
-      toast.error("Username must be between 3 and 20 characters.");
+      toast.error(t("signUpError1"));
       return success;
     } else if (username.includes(" ")) {
-      toast.error("Usernames must not contain spaces.");
+      toast.error(t("signUpError2"));
       return success;
     } else if (!/^[a-zA-Z0-9_-]+$/.test(username)) {
-      toast.error(
-        "Usernames must be letters, numbers, dashes, and underscores only."
-      );
+      toast.error(t("signUpError3"));
       return success;
     } else if (await UserWithUsernameExists(username)) {
-      toast.error("The username has already been taken.");
+      toast.error(t("signUpError4"));
       return success;
     } else if (password1 !== password2) {
-      toast.error("Passwords do not match");
+      toast.error(t("signUpError5"));
       return success;
     }
 
@@ -92,14 +136,15 @@ export async function SignUp(
   return success;
 }
 
-export function SignIn(email: any, password: any) {
-  let success = true;
+export async function SignIn(email: any, password: any) {
+  var success = true;
 
-  signInWithEmailAndPassword(auth, email, password)
+  await signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
     })
     .catch((error) => {
+      success = false;
       handleAuthError(error);
     });
 
@@ -108,37 +153,40 @@ export function SignIn(email: any, password: any) {
 
 export function SignOut() {
   signOut(auth).catch(() => {
-    toast.error("Error signing out. Please try again later.");
+    toast.error(t("signOutError"));
   });
 }
 
 function handleAuthError(error: any) {
+  console.error("Error code: ", error.code);
   switch (error.code) {
     case "auth/email-already-in-use":
-      toast.error("Email address is already in use.");
+      toast.error(t("authError1"));
       break;
     case "auth/invalid-email":
-      toast.error("Invalid email address.");
+      toast.error(t("authError2"));
       break;
     case "auth/weak-password":
-      toast.error("Password is too weak.");
+      toast.error(t("authError3"));
       break;
     case "auth/user-disabled":
-      toast.error("This account has been disabled.");
+      toast.error(t("authError4"));
+      break;
+    case "auth/invalid-credential":
+      toast.error(t("authError5"));
       break;
     case "auth/user-not-found":
-    case "auth/wrong-password":
-      toast.error("Incorrect username or password.");
+      toast.error(t("authError6"));
       break;
     case "auth/too-many-requests":
-      toast.error("Too many sign-in attempts. Please try again later.");
+      toast.error(t("authError7"));
       break;
     case "auth/operation-not-allowed":
-      toast.error("Sign-in is not allowed for this method.");
+      toast.error(t("authError8"));
       break;
-    // Add more cases as needed for other error codes
     default:
-      toast.error("An error occurred. Please try again later.");
+      toast.error(t("authError9"));
+      break;
   }
 }
 // ########################
@@ -200,9 +248,9 @@ export async function AddToFavourites(
     await updateDoc(userDoc, {
       Favourites: arrayUnion(favourite),
     });
-    toast.success("Product added to favourites!");
+    toast.success(t("addFavSuccess"));
   } catch (error) {
-    toast.error("Error adding product to favourites.");
+    toast.error(t("addFavError"));
     console.error("Error adding to favourites: ", error);
   }
 }
@@ -217,9 +265,9 @@ export async function RemoveFromFavourites(
     await updateDoc(userDoc, {
       Favourites: arrayRemove(favourite),
     });
-    toast.success("Product removed from favourites!");
+    toast.success(t("removeFavSuccess"));
   } catch (error) {
-    toast.error("Error removing product from favourites.");
+    toast.error(t("removeFavError"));
     console.error("Error removing from favourites: ", error);
   }
 }

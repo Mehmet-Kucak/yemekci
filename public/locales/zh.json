@@ -55,6 +55,29 @@
     "signupSuccess": "注册成功",
     "logoutSuccess": "登出成功"
   },
+
+  "FirebaseConfig": {
+    "signUpError1": "用户名长度必须在 3 到 20 个字符之间。",
+    "signUpError2": "用户名不能包含空格。",
+    "signUpError3": "用户名只能包含字母、数字、连字符和下划线。",
+    "signUpError4": "该用户名已被占用。",
+    "signUpError5": "密码不匹配。",
+    "signOutError": "退出登录时出错。请稍后再试。",
+    "authError1": "电子邮件地址已被使用。",
+    "authError2": "无效的电子邮件地址。",
+    "authError3": "密码过于弱。",
+    "authError4": "该账户已被禁用。",
+    "authError5": "用户名或密码不正确。",
+    "authError6": "未找到该电子邮件地址对应的用户。",
+    "authError7": "登录尝试次数过多。请稍后再试。",
+    "authError8": "此方法不允许登录。",
+    "authError9": "发生错误。请稍后再试。",
+    "addFavSuccess": "产品已添加到收藏！",
+    "addFavError": "添加产品到收藏时出错。请稍后再试。",
+    "removeFavSuccess": "产品已从收藏中移除！",
+    "removeFavError": "从收藏中移除产品时出错。请稍后再试。"
+  },
+
   "Other": {
     "appLang": "应用语言为简体中文",
     "showDir": "显示路线",

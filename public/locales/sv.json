@@ -55,6 +55,29 @@
     "signupSuccess": "Registrering Framgångsrik",
     "logoutSuccess": "Utloggning Framgångsrik"
   },
+
+  "FirebaseConfig": {
+    "signUpError1": "Användarnamnet måste vara mellan 3 och 20 tecken långt.",
+    "signUpError2": "Användarnamn får inte innehålla mellanslag.",
+    "signUpError3": "Användarnamn får endast innehålla bokstäver, siffror, bindestreck och understreck.",
+    "signUpError4": "Användarnamnet är redan taget.",
+    "signUpError5": "Lösenorden matchar inte.",
+    "signOutError": "Fel vid utloggning. Försök igen senare.",
+    "authError1": "E-postadressen används redan.",
+    "authError2": "Ogiltig e-postadress.",
+    "authError3": "Lösenordet är för svagt.",
+    "authError4": "Detta konto har inaktiverats.",
+    "authError5": "Fel användarnamn eller lösenord.",
+    "authError6": "Ingen användare hittades med denna e-postadress.",
+    "authError7": "För många inloggningsförsök. Försök igen senare.",
+    "authError8": "Inloggning är inte tillåten för denna metod.",
+    "authError9": "Ett fel uppstod. Försök igen senare.",
+    "addFavSuccess": "Produkt tillagd i favoriter!",
+    "addFavError": "Fel vid tillägg av produkt till favoriter. Försök igen senare.",
+    "removeFavSuccess": "Produkt borttagen från favoriter!",
+    "removeFavError": "Fel vid borttagning av produkt från favoriter. Försök igen senare."
+  },
+
   "Other": {
     "appLang": "Appens språk är Svenska",
     "showDir": "Visa Vägbeskrivning",
