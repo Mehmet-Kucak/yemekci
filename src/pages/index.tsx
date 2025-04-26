@@ -87,8 +87,118 @@ const Home = () => {
           "places"
         )) as google.maps.PlacesLibrary;
 
+        let textQuery;
+
+        switch (data[selectedProduct].productGroup) {
+          case "Yemekler ve çorbalar":
+            textQuery =
+              "restaurants or bakeries or with " +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+          case "İşlenmiş İşlenmemiş Et Ürünleri":
+            textQuery =
+              "butchers with " +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+          case "Fırıncılık ve pastacılık mamulleri, hamur işleri, tatlılar":
+            textQuery =
+              "bakeries or restaurants or cafes with " +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+          case "Çikolata, şekerleme ve türevi ürünler":
+            textQuery =
+              "" +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+          case "Dondurmalar ve yenilebilir buzlar":
+            textQuery =
+              "ice cream shops with " +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+          case "Yiyecekler için çeşni / lezzet vericiler, soslar ve tuz":
+            textQuery =
+              "spice shops with " +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+          case "Alkolsüz içecekler":
+            textQuery =
+              "beverage shops with " +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+          case "Biralar ve diğer alkollü içkiler":
+            textQuery =
+              "liquor stores with " +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+          case "Tütün":
+            textQuery =
+              "tobacco shops with " +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+          case "Peynirler":
+            textQuery =
+              "cheese shops with " +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+          case "Tereyağı dâhil katı ve sıvı yağlar":
+            textQuery =
+              "oil shops with " +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+          case "Peynirler ve tereyağı dışında kalan süt ürünleri":
+            textQuery =
+              "dairy shops with " +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+          case "Bal":
+            textQuery =
+              "honey shops with " +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+          case "İşlenmiş ve işlenmemiş meyve ve sebzeler ile mantarlar":
+            textQuery =
+              "fruit and vegetable shops with " +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+          default:
+            textQuery =
+              "restaurants with " +
+              data[selectedProduct].name +
+              " in " +
+              data[selectedProduct].province;
+            break;
+        }
+
         const request = {
-          textQuery: "" + data[selectedProduct].name + " in " + city[1],
+          textQuery: textQuery,
           fields: [
             "displayName",
             "id",
