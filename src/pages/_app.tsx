@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { NextIntlClientProvider } from "next-intl";
 import { useRouter } from "next/router";
 import Script from "next/script";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       timeZone="Europe/Istanbul"
       messages={pageProps.messages}
     >
+      <SpeedInsights />
       <Toaster />
       <Component {...pageProps} />
       <Script

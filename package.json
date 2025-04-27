@@ -13,6 +13,7 @@
     "@react-google-maps/api": "^2.20.6",
     "@turf/turf": "^6.5.0",
     "@types/react-map-gl": "^6.1.6",
+    "@vercel/speed-insights": "^1.2.0",
     "firebase": "^10.12.2",
     "leaflet": "^1.9.4",
     "leaflet-routing-machine": "^3.2.12",
