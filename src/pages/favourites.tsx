@@ -87,7 +87,7 @@ const Favourites = () => {
         switch (data[selectedProduct].productGroup) {
           case "Yemekler ve çorbalar":
             textQuery =
-              "restaurants or bakeries or with " +
+              "restaurants with " +
               data[selectedProduct].name +
               " in " +
               data[selectedProduct].province;
@@ -206,8 +206,12 @@ const Favourites = () => {
         };
 
         const { places } = await Place.searchByText(request);
-        //console.log(places);
-        setPlaces(places);
+
+        const sorted = places.sort(
+          (a, b) => (b.userRatingCount ?? 0) - (a.userRatingCount ?? 0)
+        );
+
+        setPlaces(sorted);
       })();
     } else {
       //console.log("Selected product is -1, skipping Places API call.");

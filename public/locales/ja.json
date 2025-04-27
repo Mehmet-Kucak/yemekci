@@ -10,7 +10,8 @@
     "removeFav": "お気に入りから削除",
     "aboutProduct": "{product} に関する情報",
     "reviews": "レビュー",
-    "startNav": "ナビ開始"
+    "startNav": "ナビ開始",
+    "loginToFav": "商品をお気に入りに追加するにはログインが必要です"
   },
 
   "Search": {

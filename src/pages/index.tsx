@@ -92,7 +92,7 @@ const Home = () => {
         switch (data[selectedProduct].productGroup) {
           case "Yemekler ve çorbalar":
             textQuery =
-              "restaurants or bakeries or with " +
+              "restaurants with " +
               data[selectedProduct].name +
               " in " +
               data[selectedProduct].province;
@@ -208,12 +208,15 @@ const Home = () => {
             "userRatingCount",
             "reviews",
           ],
-          locationBias: { lat: position[0], lng: position[1] },
         };
 
         const { places } = await Place.searchByText(request);
-        //console.log(places);
-        setPlaces(places);
+
+        const sorted = places.sort(
+          (a, b) => (b.userRatingCount ?? 0) - (a.userRatingCount ?? 0)
+        );
+
+        setPlaces(sorted);
       })();
     } else {
       //console.log("Selected product is -1, skipping Places API call.");
@@ -289,7 +292,7 @@ const Home = () => {
 
     if (navigator.geolocation) {
       try {
-        const position = await getAccuratePosition(100, 10000);
+        const position = await getAccuratePosition(30, 5000);
         const { latitude: lat, longitude: lng } = position.coords;
 
         console.log(lat, lng);
@@ -433,6 +436,11 @@ const Home = () => {
   };
 
   const favButton = async () => {
+    if (!currUser) {
+      toast.error(t("loginToFav"));
+      return;
+    }
+
     if (currUser && data[selectedProduct]) {
       const favourite = { city: city[0], id: data[selectedProduct].id };
       await AddToFavourites(currUser.uid, favourite);
@@ -442,6 +450,11 @@ const Home = () => {
   };
 
   const unfavButton = async () => {
+    if (!currUser) {
+      toast.error(t("loginToFav"));
+      return;
+    }
+
     if (currUser && data[selectedProduct]) {
       const favourite = { city: city[0], id: data[selectedProduct].id };
       await RemoveFromFavourites(currUser.uid, favourite);

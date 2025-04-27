@@ -10,7 +10,8 @@
     "removeFav": "Favorilerden Çıkar",
     "aboutProduct": "{product} Hakkında Bilgiler",
     "reviews": "Yorumlar",
-    "startNav": "Navigasyonu Başlat"
+    "startNav": "Navigasyonu Başlat",
+    "loginToFav": "Ürünleri favorilerine eklemek için giriş yapmalısınız"
   },
 
   "Search":{

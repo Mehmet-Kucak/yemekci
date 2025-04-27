@@ -10,7 +10,8 @@
     "removeFav": "Verwijderen uit Favorieten",
     "aboutProduct": "Informatie Over {product}",
     "reviews": "Beoordelingen",
-    "startNav": "Navigatie Starten"
+    "startNav": "Navigatie Starten",
+    "loginToFav": "Je moet inloggen om producten aan favorieten toe te voegen"
   },
 
   "Search": {

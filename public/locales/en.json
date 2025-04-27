@@ -10,7 +10,8 @@
     "removeFav": "Remove from Favorites",
     "aboutProduct": "Information About {product}",
     "reviews": "Reviews",
-    "startNav": "Start Navigation"
+    "startNav": "Start Navigation",
+    "loginToFav": "You must log in to add products to favorites"
   },
 
   "Search": {
