@@ -237,62 +237,61 @@ const Home = () => {
     return distanceInMeters / 1000; // in kilometers
   };
 
-  const getProducts = async () => {
-    function getAccuratePosition(
-      threshold = 30,
-      maxWait = 20000
-    ): Promise<GeolocationPosition> {
-      return new Promise((resolve, reject) => {
-        if (!navigator.geolocation) {
-          return reject(new Error("Geolocation not supported"));
-        }
+  async function getAccuratePosition(
+    threshold = 30,
+    maxWait = 20000
+  ): Promise<GeolocationPosition> {
+    return new Promise((resolve, reject) => {
+      if (!navigator.geolocation) {
+        return reject(new Error("Geolocation not supported"));
+      }
 
-        let bestPosition: GeolocationPosition | null = null;
-        let watchId: number;
+      let bestPosition: GeolocationPosition | null = null;
+      let watchId: number;
+      let timeoutId: number;
+      let firstReceived = false;
 
-        const timeoutId = setTimeout(() => {
-          navigator.geolocation.clearWatch(watchId);
-          if (bestPosition) {
-            console.warn("Returning best available position (timeout).");
-            resolve(bestPosition);
-          } else {
-            reject(new Error("Timeout and no position available"));
+      watchId = navigator.geolocation.watchPosition(
+        (pos) => {
+          console.log(
+            `Position received with accuracy ${pos.coords.accuracy} m`
+          );
+          if (
+            !bestPosition ||
+            pos.coords.accuracy < bestPosition.coords.accuracy
+          ) {
+            bestPosition = pos;
           }
-        }, maxWait);
-
-        watchId = navigator.geolocation.watchPosition(
-          (pos) => {
-            console.log(`Accuracy: ${pos.coords.accuracy} m`);
-            if (
-              !bestPosition ||
-              pos.coords.accuracy < bestPosition.coords.accuracy
-            ) {
-              bestPosition = pos;
-            }
-
-            if (pos.coords.accuracy <= threshold) {
-              clearTimeout(timeoutId);
+          if (!firstReceived) {
+            firstReceived = true;
+            console.log("First position obtained, starting accuracy timeout");
+            timeoutId = window.setTimeout(() => {
               navigator.geolocation.clearWatch(watchId);
-              resolve(pos);
-            }
-          },
-          (err) => {
+              console.log("Timeout reached, returning best available position");
+              resolve(bestPosition!);
+            }, maxWait);
+          }
+          if (pos.coords.accuracy <= threshold) {
             clearTimeout(timeoutId);
             navigator.geolocation.clearWatch(watchId);
-            reject(err);
-          },
-          {
-            enableHighAccuracy: true,
-            maximumAge: 0,
-            timeout: maxWait,
+            console.log("Desired accuracy achieved, returning position");
+            resolve(pos);
           }
-        );
-      });
-    }
+        },
+        (err) => {
+          clearTimeout(timeoutId);
+          navigator.geolocation.clearWatch(watchId);
+          reject(err);
+        },
+        { enableHighAccuracy: true, maximumAge: 0 }
+      );
+    });
+  }
 
+  const getProducts = async () => {
     if (navigator.geolocation) {
       try {
-        const position = await getAccuratePosition(100, 20000);
+        const position = await getAccuratePosition(100, 10_000);
         const { latitude: lat, longitude: lng } = position.coords;
 
         console.log(lat, lng);
