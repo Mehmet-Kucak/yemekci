@@ -292,7 +292,7 @@ const Home = () => {
 
     if (navigator.geolocation) {
       try {
-        const position = await getAccuratePosition(30, 5000);
+        const position = await getAccuratePosition(100, 20000);
         const { latitude: lat, longitude: lng } = position.coords;
 
         console.log(lat, lng);
