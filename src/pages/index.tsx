@@ -208,6 +208,10 @@ const Home = () => {
             "userRatingCount",
             "reviews",
           ],
+          locationBias: {
+            lat: position[0],
+            lng: position[1],
+          },
         };
 
         const { places } = await Place.searchByText(request);
@@ -332,7 +336,6 @@ const Home = () => {
               };
             });
 
-            // YOUR custom priority order:
             const priorityList = [
               "Yemekler ve çorbalar",
               "Fırıncılık ve pastacılık mamulleri, hamur işleri, tatlılar",

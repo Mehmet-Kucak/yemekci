@@ -270,11 +270,10 @@ const Search = () => {
             };
           });
 
-          // custom group priority list
           const priorityList = [
             "Yemekler ve çorbalar",
-            "İşlenmiş İşlenmemiş Et Ürünleri",
             "Fırıncılık ve pastacılık mamulleri, hamur işleri, tatlılar",
+            "İşlenmiş İşlenmemiş Et Ürünleri",
             "Çikolata, şekerleme ve türevi ürünler",
             "Dondurmalar ve yenilebilir buzlar",
             "Yiyecekler için çeşni / lezzet vericiler, soslar ve tuz",
