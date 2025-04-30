@@ -208,10 +208,6 @@ const Home = () => {
             "userRatingCount",
             "reviews",
           ],
-          locationBias: {
-            lat: position[0],
-            lng: position[1],
-          },
         };
 
         const { places } = await Place.searchByText(request);
