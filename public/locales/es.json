@@ -25,7 +25,8 @@
     "removeFav": "Eliminar de Favoritos",
     "aboutProduct": "Información Sobre {product}",
     "reviews": "Reseñas",
-    "startNav": "Iniciar Navegación"
+    "startNav": "Iniciar Navegación",
+    "loginToFav": "Debes iniciar sesión para agregar productos a favoritos"
   },
 
   "Favourites": {

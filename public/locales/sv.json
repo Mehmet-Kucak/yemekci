@@ -25,7 +25,8 @@
     "removeFav": "Ta Bort från Favoriter",
     "aboutProduct": "Information om {product}",
     "reviews": "Recensioner",
-    "startNav": "Starta Navigering"
+    "startNav": "Starta Navigering",
+    "loginToFav": "Du måste logga in för att lägga till produkter i favoriter"
   },
 
   "Favourites": {

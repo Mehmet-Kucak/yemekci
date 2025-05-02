@@ -25,7 +25,8 @@
     "removeFav": "从收藏夹中移除",
     "aboutProduct": "关于 {product} 的信息",
     "reviews": "评论",
-    "startNav": "开始导航"
+    "startNav": "开始导航",
+    "loginToFav": "您必须登录才能将产品添加到收藏夹"
   },
 
   "Favourites": {
