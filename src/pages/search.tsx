@@ -230,13 +230,19 @@ const Search = () => {
   const getProducts = async () => {
     if (navigator.geolocation) {
       try {
+        console.log("Getting location...");
         const position = await new Promise<GeolocationPosition>(
           (resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject);
+            navigator.geolocation.getCurrentPosition(resolve, reject, {
+              enableHighAccuracy: false,
+              timeout: 10_000,
+              maximumAge: 600_000,
+            });
           }
         );
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
+        console.log("Location obtained:", lat, lng);
 
         await setPosition([lat, lng]);
         await setSearchState(2);
@@ -257,6 +263,7 @@ const Search = () => {
             where("productGroup", "not-in", excludedProductGroups)
           );
 
+          console.log("Querying Firestore for products...");
           const querySnapshot = await getDocs(q);
           // include productGroup for sorting
           const docsWithGroup = querySnapshot.docs.map((doc) => {
@@ -269,6 +276,7 @@ const Search = () => {
               productGroup: data.productGroup,
             };
           });
+          console.log("Products fetched from Firestore");
 
           const priorityList = [
             "Yemekler ve çorbalar",
@@ -286,6 +294,7 @@ const Search = () => {
             "Bal",
             "İşlenmiş ve işlenmemiş meyve ve sebzeler ile mantarlar",
           ];
+          console.log("Sorting products by priority and name");
           const getPriority = (group: string) => {
             const idx = priorityList.indexOf(group);
             return idx === -1 ? Number.MAX_SAFE_INTEGER : idx;
@@ -298,10 +307,12 @@ const Search = () => {
             if (pa !== pb) return pa - pb;
             return a.name.localeCompare(b.name);
           });
+          console.log("Products sorted by priority and name");
 
           // keep productGroup property for DocumentData compliance
           const sortedDocs = docsWithGroup;
-          setData(sortedDocs);
+          await setData(sortedDocs);
+          console.log("Products set to state");
         } catch (error) {
           console.error("Error fetching documents: ", error);
         }
