@@ -10,7 +10,9 @@
 
 .map path {
   fill: #286090;
-  stroke: #286090;
+  stroke: #418aca;
+  stroke-width: 3px;
+  stroke-linecap: round;
   height: 100%;
   width: 100%;
 }
