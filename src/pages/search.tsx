@@ -96,7 +96,7 @@ const Search = () => {
         switch (data[selectedProduct].productGroup) {
           case "Yemekler ve çorbalar":
             textQuery =
-              "restaurants or bakeries or with " +
+              "restaurants with " +
               data[selectedProduct].name +
               " in " +
               data[selectedProduct].province;
@@ -215,8 +215,12 @@ const Search = () => {
         };
 
         const { places } = await Place.searchByText(request);
-        //console.log(places);
-        setPlaces(places);
+
+        const sorted = places.sort(
+          (a, b) => (b.userRatingCount ?? 0) - (a.userRatingCount ?? 0)
+        );
+
+        setPlaces(sorted);
       })();
     } else {
       //console.log("Selected product is -1, skipping Places API call.");
@@ -226,13 +230,19 @@ const Search = () => {
   const getProducts = async () => {
     if (navigator.geolocation) {
       try {
+        console.log("Getting location...");
         const position = await new Promise<GeolocationPosition>(
           (resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject);
+            navigator.geolocation.getCurrentPosition(resolve, reject, {
+              enableHighAccuracy: false,
+              timeout: 10_000,
+              maximumAge: 600_000,
+            });
           }
         );
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
+        console.log("Location obtained:", lat, lng);
 
         await setPosition([lat, lng]);
         await setSearchState(2);
@@ -253,6 +263,7 @@ const Search = () => {
             where("productGroup", "not-in", excludedProductGroups)
           );
 
+          console.log("Querying Firestore for products...");
           const querySnapshot = await getDocs(q);
           // include productGroup for sorting
           const docsWithGroup = querySnapshot.docs.map((doc) => {
@@ -265,12 +276,12 @@ const Search = () => {
               productGroup: data.productGroup,
             };
           });
+          console.log("Products fetched from Firestore");
 
-          // custom group priority list
           const priorityList = [
             "Yemekler ve çorbalar",
-            "İşlenmiş İşlenmemiş Et Ürünleri",
             "Fırıncılık ve pastacılık mamulleri, hamur işleri, tatlılar",
+            "İşlenmiş İşlenmemiş Et Ürünleri",
             "Çikolata, şekerleme ve türevi ürünler",
             "Dondurmalar ve yenilebilir buzlar",
             "Yiyecekler için çeşni / lezzet vericiler, soslar ve tuz",
@@ -283,6 +294,7 @@ const Search = () => {
             "Bal",
             "İşlenmiş ve işlenmemiş meyve ve sebzeler ile mantarlar",
           ];
+          console.log("Sorting products by priority and name");
           const getPriority = (group: string) => {
             const idx = priorityList.indexOf(group);
             return idx === -1 ? Number.MAX_SAFE_INTEGER : idx;
@@ -295,10 +307,12 @@ const Search = () => {
             if (pa !== pb) return pa - pb;
             return a.name.localeCompare(b.name);
           });
+          console.log("Products sorted by priority and name");
 
           // keep productGroup property for DocumentData compliance
           const sortedDocs = docsWithGroup;
-          setData(sortedDocs);
+          await setData(sortedDocs);
+          console.log("Products set to state");
         } catch (error) {
           console.error("Error fetching documents: ", error);
         }
@@ -388,6 +402,11 @@ const Search = () => {
   };
 
   const favButton = async () => {
+    if (!currUser) {
+      toast.error(t("loginToFav"));
+      return;
+    }
+
     if (currUser && data[selectedProduct]) {
       const favourite = { city: city[0], id: data[selectedProduct].id };
       await AddToFavourites(currUser.uid, favourite);
@@ -397,6 +416,11 @@ const Search = () => {
   };
 
   const unfavButton = async () => {
+    if (!currUser) {
+      toast.error(t("loginToFav"));
+      return;
+    }
+
     if (currUser && data[selectedProduct]) {
       const favourite = { city: city[0], id: data[selectedProduct].id };
       await RemoveFromFavourites(currUser.uid, favourite);

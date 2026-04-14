@@ -11,7 +11,7 @@ import styles from "@styles/DynamicMap.module.css";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 
-interface CoordsDirectionsProps {
+interface DynamicMapProps {
   origin: { lat: number; lng: number };
   destination: { lat: number; lng: number };
   travelMode?: google.maps.TravelMode;
@@ -19,7 +19,7 @@ interface CoordsDirectionsProps {
   mapZoom?: number;
 }
 
-export default function CoordsDirections({
+export default function DynamicMap({
   origin,
   destination,
   travelMode = google.maps.TravelMode.DRIVING,
@@ -28,14 +28,8 @@ export default function CoordsDirections({
     lng: (origin.lng + destination.lng) / 2,
   },
   mapZoom = 7,
-}: CoordsDirectionsProps) {
+}: DynamicMapProps) {
   const router = useRouter();
-
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.NEXT_GOOGLE_MAPS_API_KEY!,
-    libraries: ["places", "geometry"],
-  });
-
   const [directions, setDirections] =
     useState<google.maps.DirectionsResult | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -55,8 +49,6 @@ export default function CoordsDirections({
     },
     []
   );
-
-  if (!isLoaded) return <p>Loading map…</p>;
 
   return (
     <div className={styles.wrapper}>

@@ -10,8 +10,8 @@
     "removeFav": "Aus Favoriten Entfernen",
     "aboutProduct": "Informationen Über {product}",
     "reviews": "Bewertungen",
-    "startNav": "Navigation Starten"
-
+    "startNav": "Navigation Starten",
+    "loginToFav": "Sie müssen sich anmelden, um Produkte zu Ihren Favoriten hinzuzufügen"
   },
 
   "Search": {
@@ -25,7 +25,8 @@
     "removeFav": "Aus Favoriten Entfernen",
     "aboutProduct": "Informationen Über {product}",
     "reviews": "Bewertungen",
-    "startNav": "Navigation Starten"
+    "startNav": "Navigation Starten",
+    "loginToFav": "Sie müssen sich anmelden, um Produkte zu Ihren Favoriten hinzuzufügen"
   },
 
   "Favourites": {
